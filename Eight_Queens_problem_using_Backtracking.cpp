@@ -23,57 +23,56 @@ int main()
 
 // backtrack
 
-    if (queenAgent(0) == 0)
-        {
-        cout<<"\n Solution does not exist \n";
-        }
+if (queenAgent(0) == 0)
+  {
+  cout<<"\n Solution does not exist \n";
+  }
 
 // result
 
  cout<<"\n\n     result \n\n\n";
 
- for (i = 0; i < n; i++)
-        {
-        for (j = 0; j < n; j++)
-            {
-                cout<<" "<<a[i][j]<<" ";
+for (i = 0; i < n; i++)
+     {
+     for (j = 0; j < n; j++)
+         {
+            cout<<" "<<a[i][j]<<" ";
+         }
+       cout<<"\n\n";
+     }
 
-            }
-        cout<<"\n\n";
-        }
-
-        td=m+b;
+  td=m+b;
 
   cout<<"\n\n time delay : "<<td<<"\n\n";
   cout<<"\n # total move cost : "<<m;
   cout<<"\n\n # total backtrack : "<<b<<"\n\n";
 
-    return 0;
+  return 0;
 }
 
 // check position
 
 int check(int row,int column)
 {
-    int r, c=0;
+   int r, c=0;
 
-// row on the left
+   // row on the left
 
-    while (c<column)
-    {
-        if (a[row][c]==1)
-            {
-            return 0;
-            }
-          c++;
-    }
+   while (c<column)
+   {
+     if (a[row][c]==1)
+         {
+         return 0;
+         }
+       c++;
+   }
 
 // top diagonal on the left
 
    r=row;
    c=column;
-   
-  while (r>=0 && c>=0)
+
+   while (r>=0 && c>=0)
      {
          if (a[r][c]==1)
            {
@@ -85,25 +84,25 @@ int check(int row,int column)
 
 // down diagonal on the left
 
-     r = row;
-     c = column;
-    
-    while (c >= 0 && r < n)
-      {
-          if (a[r][c]==1)
-          {
-            return 0;
-          }
-           r++;
-           c--;
-      }
+   r = row;
+   c = column;
+
+   while (c >= 0 && r < n)
+   {
+       if (a[r][c]==1)
+       {
+         return 0;
+       }
+        r++;
+        c--;
+   }
 
 //move
 
-      m=m+1;
-      cout<<"\n move no : "<<m<<"\n";
+   m=m+1;
+   cout<<"\n move no : "<<m<<"\n";
 
-    return 1;
+   return 1;
 }
 
 // queenAgent
@@ -113,47 +112,44 @@ int queenAgent(int column)
 
 // return 1 if the result ready
 
-    if (column >= n)
-    {
-        return 1;
-    }
+   if (column >= n)
+   {
+      return 1;
+   }
 
 // with this column ,and iterative  row ,it will work for setting queen
 
-     int i = 0;
+  int i = 0;
 
-     do {
+  do {
+     // possibility for setting the queen a[i][column]
+   if (check(i, column)==1)
+   {
+       // set queen in a[i][column]
 
-        // possibility for setting the queen a[i][column]
+       a[i][column] = 1;
 
-      if (check(i, column)==1)
-      {
-          // set queen in a[i][column]
+       // set remains queen
 
-          a[i][column] = 1;
+       int next_column=column + 1;
+       if (queenAgent(next_column)==1)
+          {
+            return 1;
+          }
 
-          // set remains queen
+       // if setting queen in a[i][column] don't give solution then remove it from that place
 
-          int next_column=column + 1;
-          if (queenAgent(next_column)==1)
-             {
-                 return 1;
-             }
+       a[i][column] = 0;      // BACKTRACK
 
-          // if setting queen in a[i][column] don't give solution then remove it from that place
+       //backtrack
 
-          a[i][column] = 0;      // BACKTRACK
-
-          //backtrack
-
-            b=b+1;
-            cout<<"\n backtrack no : "<<b  << "\n";
+         b=b+1;
+         cout<<"\n backtrack no : "<<b  << "\n";
         }
-        i++;
-    }
-    while(i < n);
+         i++;
+ }
+ while(i < n);
 
 // with this column ,and iterative  row , if queen don't get any row for it's position, return 0
-
     return 0;
 }
