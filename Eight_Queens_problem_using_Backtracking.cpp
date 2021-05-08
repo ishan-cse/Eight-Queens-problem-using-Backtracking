@@ -17,37 +17,36 @@ int main()
         for(j=0;j<n;j++)
         {
             a[i][j]=0;
-
         }
     }
 
 // backtrack
 
-if (queenAgent(0) == 0)
-  {
-  cout<<"\n Solution does not exist \n";
-  }
+   if (queenAgent(0) == 0)
+     {
+      cout<<"\n Solution does not exist \n";
+     }
 
 // result
 
- cout<<"\n\n     result \n\n\n";
+   cout<<"\n\n    result \n\n\n";
 
-for (i = 0; i < n; i++)
+   for (i = 0; i < n; i++)
      {
-     for (j = 0; j < n; j++)
-         {
-            cout<<" "<<a[i][j]<<" ";
-         }
-       cout<<"\n\n";
+        for (j = 0; j < n; j++)
+            {
+               cout<<" "<<a[i][j]<<" ";
+            }
+          cout<<"\n\n";
      }
 
-  td=m+b;
+   td=m+b;
 
-  cout<<"\n\n time delay : "<<td<<"\n\n";
-  cout<<"\n # total move cost : "<<m;
-  cout<<"\n\n # total backtrack : "<<b<<"\n\n";
+   cout<<"\n\n time delay : "<<td<<"\n\n";
+   cout<<"\n # total move cost : "<<m;
+   cout<<"\n\n # total backtrack : "<<b<<"\n\n";
 
-  return 0;
+   return 0;
 }
 
 // check position
@@ -69,8 +68,8 @@ int check(int row,int column)
 
 // top diagonal on the left
 
-   r=row;
-   c=column;
+   r = row;
+   c = column;
 
    while (r>=0 && c>=0)
      {
@@ -125,27 +124,28 @@ int queenAgent(int column)
      // possibility for setting the queen a[i][column]
    if (check(i, column)==1)
    {
-       // set queen in a[i][column]
+          // set queen in a[i][column]
 
-       a[i][column] = 1;
+          a[i][column] = 1;
 
-       // set remains queen
+          // set remains queen
 
-       int next_column=column + 1;
-       if (queenAgent(next_column)==1)
+          int next_column=column + 1;
+
+          if (queenAgent(next_column)==1)
           {
             return 1;
           }
 
-       // if setting queen in a[i][column] don't give solution then remove it from that place
+         // if setting queen in a[i][column] don't give solution then remove it from that place
 
-       a[i][column] = 0;      // BACKTRACK
+          a[i][column] = 0;      // BACKTRACK
 
-       //backtrack
+         //backtrack
 
-         b=b+1;
-         cout<<"\n backtrack no : "<<b  << "\n";
-        }
+          b=b+1;
+          cout<<"\n backtrack no : "<<b  << "\n";
+      }
          i++;
  }
  while(i < n);
